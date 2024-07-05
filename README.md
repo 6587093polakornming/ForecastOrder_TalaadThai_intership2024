@@ -95,7 +95,7 @@ tensorflow-cpu==2.16.2
 3. Modeling and Training Model
 4. Evaluation
 5. Result and Summary
-
+6. ETC
 
 ### การนำเข้าข้อมูล (Import Data)
 การนำเข้าข้อมูลเพื่อให้ Machine Learning เรียนรู้และทำนายผลลัพท์ ตัวอย่างการเรียกข้อมูล
@@ -127,6 +127,9 @@ tensorflow-cpu==2.16.2
 
 ### Modeling and Training Model
 การออกแบบโมเดลและพัฒนาโมเดล ให้มีความเหมาะสมกับข้อมูลที่เรียนรู้และการนำไปใช้งาน 
+Library ที่ใช้พัฒนา ***"Darts"***
+
+![darts_logo](picture_markdown/darts_logo.png)
 
 #### การแบ่งข้อมูลชุดเรียนรู้และข้อมูลชุดทดสอบ (Train Test Split)
 การแบ่งข้อมูลที่ให้ Machine Learning เรียนรู้และข้อมูลที่ใช้สำหรับทดสอบ
@@ -157,7 +160,193 @@ gridSearch คือ function ช่วยเหลือนักพัฒน�
 
 #### Evaluation Train Test Split
 การทดสอบโมเดลกับข้อมูลชุดข้อมูลและนำมาเปรียบเทียบ ตัวอย่างการทดสอบ Linear Regression 
+
 ![prediction_plot](picture_markdown/pred_plot.png)
 
 ### Result and Summary
-การสรุปผลโมเดลที่ได้ทดสอบ จากการทดสอบโมเดลได้ผลลัพท์โปรเจ็คในระยะแรก ผู้พัฒนา
+การสรุปผลโมเดลที่ได้ทดสอบ จากการทดสอบโมเดลได้ผลลัพท์โปรเจ็คในระยะแรกสามารถสรุปผลได้ดังนี้ 
+
+![result_phase1](picture_markdown/result_phase1.png) 
+
+สรุปผลจากกรณีการทดสอบ Split test 80:20 โมเดลประเภท Statistic สามารถ Prediction ได้ดีที่สุด คือ ***ARIMA model*** มีค่า MAE 19.702, MAPE 23.0647 %, MSE 811.9856
+
+รายละเอียดการทดสอบโมเดลสามารถอ่านเพิ่มเติมได้ที่ไฟล์ ***Model_Evaluate.xlsx***
+
+### ETC
+
+#### การทำนาย (Future Prediction):
+แสดงการเรียกใช้งาน Model และบันทึกผลการทำนายรูปแบบไฟล์ CSV
+
+![future_pred](picture_markdown/future_pred.png)
+
+การบันทึกผลการทำนายรูปแบบ CSV จะถูกจัดเก็บภายใน Folder forecast
+
+![csv_pred](picture_markdown/csv_pred.png)
+
+#### การเรียกใช้และบันทึกโมเดลที่พัฒนา (Save and Load Model)
+ตัวอย่างการบันทึกและเรียกใช้งานโมเดล
+
+***SAVE MODEL***
+
+![save_model](picture_markdown/save_model.png)
+
+***LOAD MODEL***
+เราสามารถ load model ผ่าน Darts Library หรือการอ่านไฟล์ Pickle 
+
+การอ่านไฟล์ผ่าน Darts Library เรียกใช้ Static Method "Load"
+โดยเรียกผ่าน Class Model ที่เราพัฒนา ตัวอย่างภาพเรียก Catboost Model  
+
+![load_model](picture_markdown/load_model.png)
+
+การอ่านไฟล์ Pickle 
+
+![load_pickle](picture_markdown/load_pickle.png)
+
+## Deep Learning Process
+project ในระยะที่สองนี้ผู้พัฒนาได้ศึกษาและพัฒนา Deep Learning ประเภท RNN (
+Recurrent neural network
+), LSTM (Long-short Term Model) และ GRU (Gated recurrent unit)
+
+### Import Data
+วิธีการ Import Data ของ Deep Learning ไม่มีความแตกต่างจาก Statistic, Regression Model 
+
+![deep_import_data](picture_markdown/deep_import_data.png)
+
+### Data preprocessing 
+
+#### Deep Learning Train Test Split
+การพัฒนา Deep Learning Model เนื่องจากผู้พัฒนาไม่ได้ใช้งาน Darts Library ในการพัฒนาจึงเขียนคำสั่งการแบ่งชุดข้อมูลดังนี้
+
+![deep_train_test_split](picture_markdown/deep_train_test_split.png)
+
+#### Feature Scaling 
+ขั้นตอนมีความสำคัญต่อการเรียนรู้ของ Deep Learning การเปลี่ยนช่วงข้อมูลให้โมเดล Deep Learning สามารถเรียนรู้ได้อย่างมีประสิทธิภาพ
+
+![deep_scaling](picture_markdown/deep_scaling.png)
+
+#### Lags Feature
+การนำข้อมูลอดีต จากวันที่สนใจ/เป้าหมาย จัดทำในรูปแบบคอลัมน์ที่บันทึกข้อมูลอดีต n จำนวนขึ้นกับจำนวน Lags
+ตัวอย่าง
+![lags_feature](picture_markdown/lags_feature.png)
+
+Credit: Feature Engineering for Time Series Forecasting - Kishan Manani
+https://www.youtube.com/watch?v=2vMNiSeNUjI
+
+ผู้พัฒนาได้ประยุกต์ใช้งาน Lags feature (Darts Library มีคำสั่งสำหรับจัดทำ Lags แต่การพัฒนา Deep Learning ผู้พัฒนาได้สร้างชุดคำสั่งการจัดทำ Lags ในรูปแบบ List) 
+![lags_implement](picture_markdown/lags_implement.png)
+
+#### Reshape Data
+การเปลี่ยนรูปร่าง/ มิติของข้อมูลเพื่อ Deep Learning เรียนรู้ การเปลี่ยนแปลงมิติข้อมูลโดยมีชุดคำสั่งดังนี้
+
+![deep_reshape1](picture_markdown/deep_reshape1.png)
+
+ในขั้นตอนนี้ ผู้พัฒนาได้เปลี่ยนแปลงข้อมูล Format เพื่อ Input สำหรับ RNN Model จากเดิมที่มี 2 มิติ (samples, feature) เป็น 3 มิติ (samples, time steps[lags], feature)
+
+
+### Deep Learning Modeling and Training
+การพัฒนา Deep Learning Model ผู้พัฒนาได้อ้างอิงโครงสร้าง Layer จาก https://www.geeksforgeeks.org/time-series-forecasting-using-recurrent-neural-networks-rnn-in-tensorflow/
+
+ตัวอย่าง LSTM Model Layer และ Optimizer ที่ใช้งาน
+
+![lstm_layer](picture_markdown/lstm_layer.png)
+
+### Result and Metric Performance
+ภาพการทดสอบ Deep Learning Model: RNN Model, LSTM Model, GRU Model
+
+![deep_result](picture_markdown/deep_result.png)
+
+ผลค่าดัชนีการทดสอบ Deep Learning Model
+
+![deep_metric](picture_markdown/deep_metric.png)
+
+
+### Summary Deep Learning Performance
+สรุปจากการทดสอบ RNN Model, LSTM Model, GRU Model ผลคือ LSTM Model มีประสิทธิภาพมากที่สุดในค่า Metric ทุกค่าได้แก่ MAE: 16.72, MSE: 512.44, MAPE: 11.68%
+
+### Save Deep Learning Model
+![deep_save](picture_markdown/deep_save.png)
+
+###  Deep Learning Future Prediction
+ตัวอย่างชุดคำสั่งบ้างส่วนสำหรับการทำนายผลลัพท์
+
+```
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+
+# สมมติว่าคุณมีโมเดล LSTM ที่ผ่านการเทรนแล้วชื่อ 'model'
+
+# และข้อมูลของคุณอยู่ในตัวแปรชื่อ 'data'
+# Selecting Open Price values
+
+df = pd.read_csv("Ming2Jul67_total_order.csv")
+df['order_completed_at'] = pd.to_datetime(df['order_completed_at'])
+data = df
+dataset = data.unique_order_count.values 
+# Reshaping 1D to 2D array
+dataset = np.reshape(dataset, (-1,1)) 
+
+# ขั้นตอนที่ 1: เตรียมข้อมูลอินพุต
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaled_data = scaler.fit_transform(dataset)
+
+# กำหนดจำนวนวันที่ใช้เป็นอินพุต และจำนวนวันที่ต้องการทำนาย
+n_steps = 50  # ใช้ข้อมูล 50 วันล่าสุดเป็นอินพุต
+n_future = 7  # ทำนาย 7 วันถัดไป (1 สัปดาห์)
+
+# เตรียมข้อมูล n_steps วันล่าสุดเป็นอินพุต
+last_steps = scaled_data[-n_steps:]
+X_forecast = last_steps.reshape((1, n_steps, 1))
+print(f"init lasted 5 days {scaler.inverse_transform(X_forecast[0][-5:])}")
+
+# ขั้นตอนที่ 2: ใช้โมเดลทำนาย
+forecasted_scaled = []
+
+for _ in range(n_future):
+    # ทำนายค่าถัดไป
+    next_pred = model.predict(X_forecast)
+    
+    # เพิ่มค่าที่ทำนายได้เข้าไปในลิสต์
+    forecasted_scaled.append(next_pred[0, 0])
+    
+    # อัปเดต X_forecast สำหรับการทำนายครั้งถัดไป
+    X_forecast = np.roll(X_forecast, -1, axis=1)
+    print(f"shift {_} {scaler.inverse_transform(X_forecast[0][-5:])}")
+    print(f"predict {_} = {scaler.inverse_transform(next_pred)}")
+    X_forecast[0, -1, 0] = next_pred[0, 0]
+    print(f"after roll {_} {scaler.inverse_transform(X_forecast[0][-5:])}")
+
+# ขั้นตอนที่ 3: ประมวลผลการทำนาย
+# แปลงค่าที่ทำนายกลับเป็นสเกลเดิม
+forecasted = scaler.inverse_transform(np.array(forecasted_scaled).reshape(-1, 1))
+unscaled = np.array(forecasted_scaled)
+# ตอนนี้ 'forecasted' มีค่าที่ทำนายสำหรับ 7 วันถัดไป
+
+```
+
+```
+import pandas as pd
+import numpy as np
+
+# สมมติว่า forecasted คือ array ของผลการทำนาย
+latest_date = df['order_completed_at'].max()
+next_date = latest_date + pd.Timedelta(days=1)
+print(next_date)
+
+#forecast # สร้าง DataFrame
+start_date = next_date
+date_range = pd.date_range(start=start_date, periods=len(forecasted))
+print(date_range)
+forecasted_df = pd.DataFrame(forecasted)
+
+forecasted_df = pd.DataFrame({
+    'date': date_range,
+    'total_order': forecasted_df[0]
+})
+
+# แสดงผล
+print(forecasted_df)
+print("\nข้อมูลของ DataFrame:")
+print(forecasted_df.info())
+```
+
+![deep_future](picture_markdown/deep_future.png)
