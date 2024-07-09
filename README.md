@@ -1,6 +1,33 @@
 # Forecast No. of Orders TalaadThai intership 2024
 This project is Machine Learning Project, forecasting number of orders TalaadThai. The idea is use time series model to forecast/future predict number of orders. The models are Regression Models, Statistic Models and Deep Learning Models Create By Mr. Polakorn Anantapakorn MUICT student year 2.  
 
+ได้ครับ ผมจะแก้ไข Markdown ให้มี Table of Contents ตามที่คุณต้องการ โดยจะเพิ่มส่วนนี้ไว้ที่ด้านบนของเอกสาร ดังนี้:
+markdownCopy# Forecast No. of Orders TalaadThai intership 2024
+
+## Table of Contents
+- [QR Code](#qr-code)
+- [Datasets](#datasets)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+  - [Requirements](#requirements)
+- [วิธีการรันโปรเจ็ค](#วิธีการรันโปรเจ็ค)
+- [Machine Learning Process](#machine-learning-process)
+  - [การนำเข้าข้อมูล (Import Data)](#การนำเข้าข้อมูล-import-data)
+  - [การวิเคราะห์ข้อมูลและการแปลงข้อมูล (Data Preprocessing)](#การวิเคราะห์ข้อมูลและการแปลงข้อมูล-data-preprocessing)
+  - [Modeling and Training Model](#modeling-and-training-model)
+  - [Evaluation](#evaluation)
+  - [Result and Summary](#result-and-summary)
+  - [ETC](#etc)
+- [Deep Learning Process](#deep-learning-process)
+  - [Import Data](#import-data-1)
+  - [Data preprocessing](#data-preprocessing-1)
+  - [Deep Learning Modeling and Training](#deep-learning-modeling-and-training)
+  - [Result and Metric Performance](#result-and-metric-performance)
+  - [Summary Deep Learning Performance](#summary-deep-learning-performance)
+  - [Save Deep Learning Model](#save-deep-learning-model)
+  - [Deep Learning Future Prediction](#deep-learning-future-prediction)
+
+
 ## QR Code
 <img src="picture_markdown/github_intership.png" alt="drawing" width="200"/>
 
