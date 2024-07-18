@@ -1,9 +1,6 @@
 # Forecast No. of Orders TalaadThai intership 2024
 This project is Machine Learning Project, forecasting number of orders TalaadThai. The idea is use time series model to forecast/future predict number of orders. The models are Regression Models, Statistic Models and Deep Learning Models Create By Mr. Polakorn Anantapakorn MUICT student year 2.  
 
-ได้ครับ ผมจะแก้ไข Markdown ให้มี Table of Contents ตามที่คุณต้องการ โดยจะเพิ่มส่วนนี้ไว้ที่ด้านบนของเอกสาร ดังนี้:
-markdownCopy# Forecast No. of Orders TalaadThai intership 2024
-
 ## Table of Contents
 - [QR Code](#qr-code)
 - [Datasets](#datasets)
